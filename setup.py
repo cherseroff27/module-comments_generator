@@ -7,9 +7,9 @@ setup(
     install_requires=[
         'selenium',
         'pyperclip',
-        'browser_manager @ git+https://github.com/cherseroff27/module-browser_manager.git',
-        'browser_manager @ git+https://github.com/cherseroff27/module-web_element_handler.git',
-        'browser_manager @ git+https://github.com/cherseroff27/module-manual_script_control.git',
+        'browser_manager @ git+https://github.com/cherseroff27/browser_manager.git',
+        'browser_manager @ git+https://github.com/cherseroff27/web_element_handler.git',
+        'browser_manager @ git+https://github.com/cherseroff27/manual_script_control.git',
     ],
     description='Генерация комментариев через ChatGPT.'
                 '(Предполагается автоматизация с помощью модуля browser_manager,'
