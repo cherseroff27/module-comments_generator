@@ -7,16 +7,16 @@ setup(
     install_requires=[
         'selenium',
         'pyperclip',
-        'module-browser_manager @ git+https://github.com/cherseroff27/browser_manager.git',
-        'module-web_elements_handler @ git+https://github.com/cherseroff27/web_elements_handler.git',
-        'module-manual_script_control @ git+https://github.com/cherseroff27/manual_script_control.git',
+        'module-browser_manager @ git+https://github.com/cherseroff27/module-browser_manager.git',
+        'module-web_elements_handler @ git+https://github.com/cherseroff27/module-web_elements_handler.git',
+        'module-manual_script_control @ git+https://github.com/cherseroff27/module-manual_script_control.git',
     ],
     description='Генерация комментариев через ChatGPT.'
                 '(Предполагается автоматизация с помощью модуля browser_manager,'
                 'использующего selenium, undetected_chromedriver).',
     author='cherseroff',
     author_email='proffitm1nd@gmail.com',
-    url='https://github.com/cherseroff27/comments_generator.git',
+    url='https://github.com/cherseroff27/module-comments_generator.git',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
