@@ -5,7 +5,7 @@ import subprocess
 from selenium.webdriver import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from web_element_handler import WebElementsHandler as Weh
+from web_elements_handler import WebElementsHandler as Weh
 from manual_script_control import ManualScriptControl
 
 
