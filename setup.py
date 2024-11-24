@@ -10,6 +10,7 @@ setup(
         'browser_manager @ git+https://github.com/cherseroff27/module-browser_manager.git#egg=browser-manager',
         'web_elements_handler @ git+https://github.com/cherseroff27/module-web_elements_handler.git#egg=web-elements-handler',
         'manual_script_control @ git+https://github.com/cherseroff27/module-manual_script_control.git#egg=manual_script_control',
+        'telegram_notificator @ git+https://github.com/cherseroff27/module-telegram_notificator.git#egg=telegram_notificator',
     ],
     description='Генерация комментариев через ChatGPT.'
                 '(Предполагается автоматизация с помощью модуля browser_manager,'
