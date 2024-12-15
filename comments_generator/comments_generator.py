@@ -58,7 +58,7 @@ class CommentsGenerator:
                 must_refresh = True
 
             try:
-                element = Weh.wait_for_element(challenge_form_locator, successful_enter_locator1,
+                element = Weh.wait_for_element_xpath(challenge_form_locator, successful_enter_locator1,
                                                successful_enter_locator2, driver=self.driver, timeout=3)
                 if element is not None:
                     if element.get_attribute("class") == "grow" or element.get_attribute("class") == "relative inline-flex justify-center text-center text-2xl font-semibold leading-9":
@@ -87,7 +87,7 @@ class CommentsGenerator:
         try:
             popup_locator_eng = "//a[contains(text(), 'Stay logged out')]"
             popup_locator_rus = "//a[contains(text(), 'Не входить')]"
-            popup_element = Weh.wait_for_element(popup_locator_eng, popup_locator_rus
+            popup_element = Weh.wait_for_element_xpath(popup_locator_eng, popup_locator_rus
                                                  , driver=self.driver, timeout=5)
         except Exception as ex:
             print("Произошла ошибка в проверке появления всплывающего окна: ", ex)
@@ -108,7 +108,7 @@ class CommentsGenerator:
 
         while scroll_attempts < max_scroll_attempts:
             try:
-                element = Weh.wait_for_element(complete_answer_locator, streaming_answer_locator,
+                element = Weh.wait_for_element_xpath(complete_answer_locator, streaming_answer_locator,
                                                driver=self.driver, timeout=3)   # Ищем нужный элемент
 
                 if element:
@@ -134,7 +134,7 @@ class CommentsGenerator:
             print("Достигнуто максимальное количество прокруток, элемент не найден.")
 
         li_elements_locator = "//div[@class='markdown prose w-full break-words dark:prose-invert light']//li"
-        li_element = Weh.wait_for_element(li_elements_locator, driver=self.driver, timeout=30)
+        li_element = Weh.wait_for_element_xpath(li_elements_locator, driver=self.driver, timeout=30)
         if li_element is not None:
             li_elements = self.driver.find_elements(By.XPATH, li_elements_locator)
             generated_comments = [li.text for li in li_elements]
@@ -145,7 +145,7 @@ class CommentsGenerator:
 
     def generate_comments(self, article_content, gender_flag, comments_amount):
         input_field_locator = "//p[@class='placeholder']"
-        input_field_element = Weh.wait_for_element(input_field_locator, driver=self.driver, timeout=30)
+        input_field_element = Weh.wait_for_element_xpath(input_field_locator, driver=self.driver, timeout=30)
 
         if input_field_element:
             prompt_text = self.generate_prompt(gender_flag, comments_amount)
