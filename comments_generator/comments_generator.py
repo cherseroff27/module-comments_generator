@@ -41,13 +41,13 @@ class CommentsGenerator:
     def get_into_chatgpt(self, chatgpt_link):
         if self.is_chatgpt_tab_open():
             self.driver.execute_script("location.reload()")
+            self.driver.get("https://chatgpt.com/?oai-dm=1")
             self.countdown_sleep(5)
         else:
             self.open_new_tab(chatgpt_link)
 
         challenge_form_locator = "//form[@id='challenge-form']"
-        successful_enter_locator1 = "//div[@class='grow']"
-        successful_enter_locator2 = "//div[@class='relative inline-flex justify-center text-center text-2xl font-semibold leading-9']"
+        prompt_textarea_locator = "//div[@id='prompt-textarea']"
         must_refresh = False
         while True:
             self.check_if_popup_appears()
@@ -58,10 +58,10 @@ class CommentsGenerator:
                 must_refresh = True
 
             try:
-                element = Weh.wait_for_element_xpath(challenge_form_locator, successful_enter_locator1,
-                                               successful_enter_locator2, driver=self.driver, timeout=3)
+                element = Weh.wait_for_element_xpath(challenge_form_locator, prompt_textarea_locator,
+                                                     driver=self.driver, timeout=3)
                 if element is not None:
-                    if element.get_attribute("class") == "grow" or element.get_attribute("class") == "relative inline-flex justify-center text-center text-2xl font-semibold leading-9":
+                    if element.get_attribute("id") == "prompt-textarea":
                         print("Ура! Успешно вошел на страницу диалога с GhatGPT.")
                         break
                     elif element.get_attribute("id") == "challenge-form":
