@@ -100,26 +100,20 @@ class CommentsGenerator:
 
     def fetch_generated_comments(self):
         time.sleep(3)
-        streaming_answer_locator = "//div[@class='result-streaming markdown prose w-full break-words dark:prose-invert light']"
-        complete_answer_locator = "//div[@class='markdown prose w-full break-words dark:prose-invert light']"
+        copy_button_locator = "//button[@data-testid='copy-turn-action-button']"
 
         scroll_attempts = 0  # Считаем количество прокруток для предотвращения бесконечного цикла
-        max_scroll_attempts = 10  # Максимальное число прокруток страни
+        max_scroll_attempts = 10  # Максимальное число прокруток страницы
 
         while scroll_attempts < max_scroll_attempts:
             try:
-                element = Weh.wait_for_element_xpath(complete_answer_locator, streaming_answer_locator,
-                                               driver=self.driver, timeout=3)   # Ищем нужный элемент
+                element = Weh.wait_for_element_xpath(copy_button_locator, driver=self.driver, timeout=3)   # Ищем нужный элемент
 
                 if element:
-                    if "result-streaming markdown" in element.get_attribute("class"):   # Проверяем, печатает ли ChatGPT или ответ завершен
+                    if "copy-turn-action-button" in element.get_attribute("data-testid"):   # Проверяем, печатает ли ChatGPT или ответ завершен
                         self.driver.execute_script("arguments[0].scrollIntoView();", element)
-                        time.sleep(3)
+                        time.sleep(1)
                         print("ChatGPT все еще печатает ответ...")
-                    elif "markdown prose w-full" in element.get_attribute("class"):
-                        self.driver.execute_script("arguments[0].scrollIntoView();", element)
-                        time.sleep(3)
-                        print("Получен полный ответ.")
                         break
             except Exception as ex:
                 print(f"Ошибка при обработке элемента: {ex}")
@@ -127,13 +121,13 @@ class CommentsGenerator:
             # Если элемент не найден, прокручиваем страницу вниз
             print("Элемент не найден, прокручиваем страницу...")
             self.driver.execute_script("window.scrollBy(0, window.innerHeight);")
-            time.sleep(2)  # Даем время для загрузки нового контента после прокрутки
+            time.sleep(1)  # Даем время для загрузки нового контента после прокрутки
             scroll_attempts += 1
 
         if scroll_attempts == max_scroll_attempts:
             print("Достигнуто максимальное количество прокруток, элемент не найден.")
 
-        li_elements_locator = "//div[@class='markdown prose w-full break-words dark:prose-invert light']//li"
+        li_elements_locator = "//div[@class='markdown prose dark:prose-invert w-full break-words light']//li"
         li_element = Weh.wait_for_element_xpath(li_elements_locator, driver=self.driver, timeout=30)
         if li_element is not None:
             li_elements = self.driver.find_elements(By.XPATH, li_elements_locator)
